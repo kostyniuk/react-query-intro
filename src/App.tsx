@@ -17,9 +17,10 @@ function App() {
   const { data, isLoading, error } = useQuery({
     queryKey: ['repos', page],
     queryFn: fetchPosts,
-    staleTime: 1000 * 2,
+    gcTime: 1000 * 60, //time to keep the data in the cache, after that the data is removed from the cache,
+    staleTime: 1000 * 2, //time to consider the data stale, after that the data is refetched
+    // when data is stale, the old data is used, but the new data is fetched in the background
   })
-
 
   if (isLoading) return <div>Loading...</div>
   if (error) return <div>Error: {error.message}</div>

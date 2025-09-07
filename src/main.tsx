@@ -8,6 +8,7 @@ import { BrowserRouter, createBrowserRouter, RouterProvider } from 'react-router
 import Home from './pages/Home.tsx'
 import Dashboard from './pages/Dashboard.tsx'
 import Above from './pages/Above.tsx'
+import { loadRepos } from './api/data.ts'
 
 const queryClient = new QueryClient()
 
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <Dashboard />,
+        loader: async () => {
+          const repos = await loadRepos()
+          return { repos }
+        },
       },
       {
         path: "above", 

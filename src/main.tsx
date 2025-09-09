@@ -25,8 +25,13 @@ const router = createBrowserRouter([
         path: "dashboard",
         element: <Dashboard />,
         loader: async () => {
-          const repos = await loadRepos()
-          return { repos }
+          await queryClient.ensureQueryData({
+            queryKey: ["repos"],
+            queryFn: () => loadRepos(),
+            staleTime: 1000 * 60 * 5, // 5 minutes
+          });
+
+          return { repos: queryClient.getQueryData(["repos"]) }
         },
       },
       {

@@ -31,6 +31,20 @@ const router = createBrowserRouter([
             staleTime: 1000 * 60 * 5, // 5 minutes
           });
 
+/**
+ * - 
+
+prefetchQuery
+→ Starts fetching and caches the result, but doesn’t return the data to you — 
+it just ensures the cache will have it when you need it later.
+Think of it as: “Start loading this quietly in the background.”
+
+- 
+ensureQueryData (or ensureQuery)
+→ Fetches (if needed) and returns the data once it’s ready.
+Think of it as: “Make sure this data exists — and give it to me when it’s ready.”
+ */
+
           return { repos: queryClient.getQueryData(["repos"]) }
         },
       },
